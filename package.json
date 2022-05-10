@@ -1,0 +1,57 @@
+{
+  "name": "react-native-dux-push",
+  "version": "0.0.1",
+  "description": "集成各个厂商的推送",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "homepage": "https://github.com/ShaoGongBra/react-native-dux-push#readme",
+  "bugs": {
+    "url": "https://github.com/ShaoGongBra/react-native-dux-push/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ShaoGongBra/react-native-dux-push.git"
+  },
+  "keywords": [
+    "push",
+    "react-native",
+    "ios",
+    "android",
+    "dux",
+    "推送",
+    "小米",
+    "xiaomi",
+    "vivo",
+    "oppo",
+    "hms",
+    "华为"
+  ],
+  "author": {
+    "name": "ShaoGong",
+    "email": "908634674@qq.com"
+  },
+  "devDependencies": {
+    "react": "17.0.0",
+    "react-native": "^0.67.3"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.1",
+    "react-native": ">=0.60.0-rc.0 <1.0.x",
+    "@react-native-community/push-notification-ios": "^1.10.1"
+  },
+  "bundleDependencies": false,
+  "deprecated": false,
+  "files": [
+    "android",
+    "!android/build",
+    "ios",
+    "!ios/build",
+    "index.js",
+    "README.md",
+    "react-native-dux-push.podspec"
+  ],
+  "license": "MIT",
+  "licenseFilename": "LICENSE"
+}
