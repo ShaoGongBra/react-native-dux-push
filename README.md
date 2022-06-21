@@ -107,8 +107,6 @@ android:protectionLevel="signature" /> <!--这里com.xiaomi.mipushdemo改成app�
 ```
 #### IOS
 
-- 引入库
-> UserNotifications.framework(iOS10+), libresolv.dylib, libxml2.dylib, libz.dylib,SystemConfiguration.framework，MobileCoreServices.framework，CFNetwork.framework，CoreTelephony.framework
 - `target`的`Capabilities`选项卡添加`Push Notifications`
 - 在`Build Settings` 中的 `Other Linker Flags` 中增加 `-ObjC`
 - 在info.plist中加入

@@ -26,5 +26,8 @@ Pod::Spec.new do |s|
 
   s.dependency "React"
   s.dependency 'RNCPushNotificationIOS'
+
+  s.frameworks = 'UserNotifications','SystemConfiguration','MobileCoreServices','CFNetwork','CoreTelephony'
+  s.library = 'resolv','xml2','z'
 end
 
