@@ -21,31 +21,7 @@ class DuxPush extends NativeEventEmitter {
 
   init(appkey, secret, data) {
     if (Platform.OS == 'android') {
-      PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE).then((state) => {
-        if (state) {
-          PermissionsAndroid.check(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE).then((state) => {
-            if (state) {
-
-              RNDuxPush.init(appkey, secret, data);
-            } else {
-              PermissionsAndroid.request(PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE).then((granted) => {
-                if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-                  RNDuxPush.init(appkey, secret, data);
-                }
-              });
-            }
-          });
-        } else {
-          PermissionsAndroid.requestMultiple([
-            PermissionsAndroid.PERMISSIONS.READ_PHONE_STATE,
-            PermissionsAndroid.PERMISSIONS.WRITE_EXTERNAL_STORAGE,
-          ]).then((granted) => {
-            // if (granted === PermissionsAndroid.RESULTS.GRANTED) {
-            RNDuxPush.init(appkey, secret, data);
-            // }
-          });
-        }
-      });
+      RNDuxPush.init(appkey, secret, data);
     }
   }
 

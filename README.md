@@ -2,17 +2,17 @@
 
 ## Getting started
 
-`$ npm install react-native-dux-push --save`
+`$ yarn add react-native-dux-push @react-native-community/push-notification-ios`
 
 ## Usage
 ```javascript
 import DuxPush from 'react-native-dux-push';
 
 // 用户同意协议之后初始化
-DuxPush.init(disable);
+DuxPush.init('', '', disable);
 
 //example    禁用oppo推送
-DuxPush.init({oppo:true});
+DuxPush.init('', '', { oppo: true} );
 
 //本地通知
 DuxPush.notify(title, body)
@@ -83,6 +83,17 @@ buildscript {
 <meta-data
     android:name="com.vivo.push.app_id"
     android:value="xxxx"/>
+```
+
+### OPPO
+```xml
+<!--AndroidManifest.xml-->
+<meta-data
+  android:name="com.oppo.push.app_key"
+  android:value="xxx"/>
+<meta-data
+  android:name="com.oppo.push.app_secret"
+  android:value="xxx"/>
 ```
 
 ### 小米
