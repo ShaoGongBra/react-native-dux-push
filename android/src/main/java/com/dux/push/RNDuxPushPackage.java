@@ -10,16 +10,17 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 
 public class RNDuxPushPackage implements ReactPackage {
-    
-    public static ReactApplicationContext reactContext;
 
-    @Override
-    public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
-        return Arrays.<NativeModule>asList(new RNDuxPushModule(reactContext));
-    }
+  public static ReactApplicationContext reactContext;
 
-    @Override
-    public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
-        return Collections.emptyList();
-    }
+  @Override
+  public List<NativeModule> createNativeModules(ReactApplicationContext reactContext) {
+    this.reactContext = reactContext;
+    return Arrays.<NativeModule>asList(new RNDuxPushModule(reactContext));
+  }
+
+  @Override
+  public List<ViewManager> createViewManagers(ReactApplicationContext reactContext) {
+    return Collections.emptyList();
+  }
 }
