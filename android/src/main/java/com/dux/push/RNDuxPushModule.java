@@ -171,7 +171,7 @@ public class RNDuxPushModule extends ReactContextBaseJavaModule {
   }
 
   @ReactMethod
-  public void openPush() {
+  public void goPushSetting() {
     Activity activity = getCurrentActivity();
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
       // 这种方案适用于 API 26, 即8.0（含8.0）以上可以用

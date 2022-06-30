@@ -54,6 +54,16 @@ namespace DuxPush {
    * @param body 消息内容
    */
   function notify(title: string, body: string): void
+  
+  /**
+   * 判断是否开启了消息通知
+   */
+  function notificationsEnabled(): Promise
+
+  /**
+   * 跳转到开启消息通知页面
+   */
+  function goPushSetting(): void
 }
 
 export default DuxPush

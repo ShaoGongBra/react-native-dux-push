@@ -4,6 +4,7 @@ import {
   NativeModules,
   Platform,
   NativeEventEmitter,
+  PermissionsAndroid,
   Alert,
 } from 'react-native';
 
@@ -22,23 +23,22 @@ class DuxPush extends NativeEventEmitter {
   init(appkey, secret, data) {
     if (Platform.OS == 'android') {
       RNDuxPush.init(appkey, secret, data);
-      RNDuxPush.notificationsEnabled().then(res => {
-        if (!res) {
-          Alert.alert(
-            '通知权限',
-            '您当前未开启通知权限，您将无法收到消息推送，是否立即前往设置开启通知权限？',
-            [
-              { text: '取消', onPress: () => { }, style: 'cancel' },
-              {
-                text: '立即前往', onPress: async () => {
-                  RNDuxPush.openPush()
-                }
-              }
-            ]
-          )
-        }
-      })
     }
+  }
+
+  /**
+   * 判断当前是否打开了通知权限
+   * @returns
+   */
+  notificationsEnabled() {
+    return RNDuxPush.notificationsEnabled();
+  }
+
+  /**
+   * 去打开通知
+   */
+  goPushSetting() {
+    RNDuxPush.goPushSetting();
   }
 
   /**

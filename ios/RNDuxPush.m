@@ -28,6 +28,43 @@ RCT_EXPORT_METHOD(unsetTag:(NSString *)text)
     [MiPushSDK unsubscribe:text];
 }
 
+RCT_EXPORT_METHOD(notificationsEnabled:(RCTPromiseResolveBlock)resolve rejecter:(RCTPromiseRejectBlock)reject)
+{
+    if (@available(iOS 10 , *))
+    {
+        [[UNUserNotificationCenter currentNotificationCenter] getNotificationSettingsWithCompletionHandler:^(UNNotificationSettings * _Nonnull settings) {
+            if (settings.authorizationStatus == UNAuthorizationStatusDenied ||
+                settings.authorizationStatus == UNAuthorizationStatusNotDetermined)
+            {
+                /// 没有权限
+                resolve(@(NO));
+            } else {
+                ///已经开启通知权限
+                resolve(@(YES));
+            }
+            
+        }];
+    } else {
+        UIUserNotificationSettings * setting = [[UIApplication sharedApplication] currentUserNotificationSettings];
+        if (setting.types == UIUserNotificationTypeNone) {
+            ///没有权限
+            resolve(@(NO));
+        } else {
+            ///已经开启通知权限
+            resolve(@(YES));
+        }
+    }
+}
+
+RCT_EXPORT_METHOD(goPushSetting) {
+    NSString *urlStr = [[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0 ? @"App-Prefs:root=NOTIFICATIONS_ID" : @"prefs:root=SETTING";
+    
+    NSURL * url = [NSURL URLWithString:urlStr];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+      [[UIApplication sharedApplication] openURL:url];
+    }
+}
+
 - (void)miPushRequestSuccWithSelector:(NSString *)selector data:(NSDictionary *)data
 {
     NSLog(@"data:%@", data);
@@ -61,22 +98,22 @@ RCT_EXPORT_METHOD(unsetTag:(NSString *)text)
 }
 
 + (void)application:(id)application didReceiveRemoteNotification:(NSDictionary *)notification {
-
+    
     [RNCPushNotificationIOS didReceiveRemoteNotification:notification];
 }
 
 + (void)application:(UIApplication *)application didReceiveLocalNotification:(UILocalNotification *)notification {
-
+    
     [RNCPushNotificationIOS didReceiveLocalNotification:notification];
     [[NSNotificationCenter defaultCenter] postNotificationName:@"duxpush_click" object:notification.userInfo];
 }
 
 // 应用在前台收到通知
 + (void)userNotificationCenter:(UNUserNotificationCenter *)center willPresentNotification:(UNNotification *)notification withCompletionHandler:(void (^)(UNNotificationPresentationOptions))completionHandler {
-
+    
     NSDictionary * userInfo = notification.request.content.userInfo;
     if([notification.request.trigger isKindOfClass:[UNPushNotificationTrigger class]]) {
-
+        
         [RNCPushNotificationIOS didReceiveRemoteNotification:userInfo];
     } else {
         completionHandler(UNNotificationPresentationOptionSound | UNNotificationPresentationOptionAlert | UNNotificationPresentationOptionBadge);
@@ -94,7 +131,7 @@ RCT_EXPORT_METHOD(unsetTag:(NSString *)text)
 }
 
 - (void) handleSend:(NSNotification *)notification {
-
+    
     [self sendEventWithName:notification.name body:notification.object];
 }
 
@@ -104,7 +141,7 @@ RCT_EXPORT_METHOD(unsetTag:(NSString *)text)
                                              selector:@selector(handleSend:)
                                                  name:@"duxpush_click"
                                                object:nil];
-
+    
 }
 
 - (void)stopObserving
@@ -114,7 +151,7 @@ RCT_EXPORT_METHOD(unsetTag:(NSString *)text)
 
 - (NSArray<NSString *> *)supportedEvents {
     NSMutableArray *arr = [[NSMutableArray alloc] init];
-
+    
     [arr addObject:@"duxpush_click"];
     
     return arr;
