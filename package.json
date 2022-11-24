@@ -1,6 +1,6 @@
 {
   "name": "react-native-dux-push",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "集成各个厂商的推送",
   "main": "index.js",
   "scripts": {
@@ -33,7 +33,6 @@
     "email": "908634674@qq.com"
   },
   "devDependencies": {
-    "react": "17.0.0",
     "react-native": "^0.67.3"
   },
   "peerDependencies": {
@@ -49,6 +48,7 @@
     "ios",
     "!ios/build",
     "index.js",
+    "index.d.ts",
     "README.md",
     "react-native-dux-push.podspec"
   ],

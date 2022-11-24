@@ -120,10 +120,14 @@ android:protectionLevel="signature" /> <!--这里com.xiaomi.mipushdemo改成app�
 
 - `target`的`Capabilities`选项卡添加`Push Notifications`
 - 在`Build Settings` 中的 `Other Linker Flags` 中增加 `-ObjC`
-- 在info.plist中加入
-- > MiSDKAppID {xxxxx}
-- > MiSDKAppKey {xxxxxx}
-- > MiSDKRun  {debug or online}
+
+- 在AppDelegate.h中添加
+```c
+#import <UserNotifications/UserNotifications.h>
+
+@interface AppDelegate : EXAppDelegateWrapper <UIApplicationDelegate, RCTBridgeDelegate, UNUserNotificationCenterDelegate>
+```
+主要是添加 UNUserNotificationCenterDelegate
 
 - 在AppDelegate.m中添加
 ```c
@@ -132,6 +136,7 @@ android:protectionLevel="signature" /> <!--这里com.xiaomi.mipushdemo改成app�
 #import <RNDuxPush.h>
 
 ...
+[UNUserNotificationCenter currentNotificationCenter].delegate = self;
 [RNDuxPush application:application didFinishLaunchingWithOptions:launchOptions];
 ...
 

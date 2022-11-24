@@ -13,6 +13,15 @@ interface InitDisable {
    * 是否禁用VIVO推送
    */
   vivo?: string
+
+  /**
+   * 友盟平台appkey
+   */
+  umeng: string
+  /**
+   * 友盟平台channel
+   */
+  channel: string
 }
 
 namespace DuxPush {

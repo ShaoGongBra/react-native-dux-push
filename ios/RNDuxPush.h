@@ -3,10 +3,9 @@
 #import <UIKit/UIKit.h>
 #import <UserNotifications/UserNotifications.h>
 #import <React/RCTEventEmitter.h>
-#import "MiPushSDK.h"
 #import <RNCPushNotificationIOS.h>
 
-@interface RNDuxPush : RCTEventEmitter <RCTBridgeModule, MiPushSDKDelegate>
+@interface RNDuxPush : RCTEventEmitter <RCTBridgeModule>
 
 + (void)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions;
 

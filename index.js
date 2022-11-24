@@ -23,6 +23,8 @@ class DuxPush extends NativeEventEmitter {
   init(appkey, secret, data) {
     if (Platform.OS == 'android') {
       RNDuxPush.init(appkey, secret, data);
+    } else {
+      RNDuxPush.init(data?.umeng, data?.channel || 'duxapp');
     }
   }
 
