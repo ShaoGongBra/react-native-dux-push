@@ -1,6 +1,6 @@
 {
   "name": "react-native-dux-push",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "集成各个厂商的推送",
   "main": "index.js",
   "scripts": {

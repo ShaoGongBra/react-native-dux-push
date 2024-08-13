@@ -72,6 +72,15 @@ RCT_EXPORT_METHOD(notificationsEnabled:(RCTPromiseResolveBlock)resolve rejecter:
     }
 }
 
+RCT_EXPORT_METHOD(goPushSetting) {
+    NSString *urlStr = [[[UIDevice currentDevice] systemVersion] floatValue] >= 10.0 ? @"App-Prefs:root=NOTIFICATIONS_ID" : @"prefs:root=SETTING";
+
+    NSURL * url = [NSURL URLWithString:urlStr];
+    if ([[UIApplication sharedApplication] canOpenURL:url]) {
+      [[UIApplication sharedApplication] openURL:url];
+    }
+}
+
 - (void)miPushRequestSuccWithSelector:(NSString *)selector data:(NSDictionary *)data
 {
     NSLog(@"data:%@", data);
